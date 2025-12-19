@@ -48,10 +48,10 @@ const references = [
   },
   {
     id: 8,
-    citation: "Hao, K. (2019). Artificial Intelligence: The biggest threat of deepfakes isnt the deepfakes themselves. MIT Technology Review.",
-    category: "Journalism",
-    url: "https://www.technologyreview.com/2019/10/10/132667/the-biggest-threat-of-deepfakes-isnt-the-deepfakes-themselves/",
-  },
+    citation: "Intel. (2022, November 14). Intel Introduces Real-Time Deepfake Detector. Intel Newsroom.",
+    category: "Corporate / Technology News",
+    url: "https://newsroom.intel.com/artificial-intelligence/intel-introduces-real-time-deepfake-detector?utm_source=chatgpt.com",
+},
   {
     id: 9,
     citation: "Sensity AI. (2023). The State of Deepfakes 2023: Realities, Threats, And Impact. Research Report.",
