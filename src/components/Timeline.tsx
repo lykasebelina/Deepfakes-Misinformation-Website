@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 
+// --- DATA: TIMELINE EVENTS ---
 const timelineEvents = [
   {
     year: "1990s - 2000s",
@@ -50,15 +51,38 @@ const timelineEvents = [
   },
 ];
 
+// --- DATA: ANALYSIS CARDS (The Text Split) ---
+const analysisCards = [
+  {
+    title: "The Technological Pivot",
+    highlight: "2014 & GANs",
+    content: "Early tools normalized editing, but the 2014 introduction of Generative Adversarial Networks (GANs) marked a critical turning point. Originally for research, GANs enabled the creation of synthetic media that is now indistinguishable from reality.",
+    delay: 0.1
+  },
+  {
+    title: "Democratization of Tools",
+    highlight: "Labs to Public",
+    content: "Post-2020, deepfake creation moved beyond technical experts into the public domain via consumer apps. This widespread accessibility directly fueled contemporary issues like online harassment, financial fraud, and identity theft.",
+    delay: 0.2
+  },
+  {
+    title: "Erosion of Trust",
+    highlight: "Global Impact",
+    content: "Building on cultural acceptance of editing, political actors now exploit deepfakes to influence elections and destabilize institutions. There is now a clear causal link between past innovation and today's crisis of information integrity.",
+    delay: 0.3
+  }
+];
+
 export default function Timeline() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   return (
-    <section id="history" className="relative py-32 bg-background">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* HEADER */}
+    <section id="history" className="relative py-32 bg-background overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
+        {/* --- HEADER --- */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -78,12 +102,13 @@ export default function Timeline() {
           </h2>
 
           <p className="text-lg md:text-xl text-muted-foreground mb-16 max-w-3xl">
-            The journey from simple photo editing to sophisticated AI-generated media manipulation
+            The journey from simple photo editing to sophisticated AI-generated media manipulation.
           </p>
         </motion.div>
 
-        {/* TIMELINE */}
-        <div className="relative">
+        {/* --- TIMELINE --- */}
+        <div className="relative mb-32">
+          {/* Vertical Line */}
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-primary"></div>
 
           <div className="space-y-12">
@@ -97,13 +122,15 @@ export default function Timeline() {
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
               >
+                {/* Dot */}
                 <div className="absolute left-0 md:left-1/2 w-4 h-4 -translate-x-1/2 bg-primary rounded-full border-4 border-background z-10"></div>
 
+                {/* Content Box */}
                 <div className={`w-full md:w-[calc(50%-2rem)] ml-8 md:ml-0 ${
                   index % 2 === 0 ? "md:pr-12" : "md:pl-12"
                 }`}>
                   <motion.div
-                    className="bg-card border border-border rounded-lg p-6 cursor-pointer hover:border-primary/50 transition-colors"
+                    className="bg-card border border-border rounded-lg p-6 cursor-pointer hover:border-primary/50 transition-colors shadow-lg"
                     onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -120,7 +147,7 @@ export default function Timeline() {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <p className="text-muted-foreground">{event.description}</p>
+                      <p className="text-muted-foreground mt-2">{event.description}</p>
                     </motion.div>
                   </motion.div>
                 </div>
@@ -129,34 +156,66 @@ export default function Timeline() {
           </div>
         </div>
 
-        {/* ✅ COMBINED BOX */}
+        {/* --- ANALYSIS GRID (REPLACED THE BIG BOX) --- */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-24 mx-auto max-w-full"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="relative"
         >
-          <div className="relative rounded-2xl p-[3px] bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 shadow-[0_0_30px_-5px_rgba(249,115,22,0.5)]">
-            <div className="rounded-xl bg-background p-8 md:p-10 text-center">
-              <h3 className="font-heading text-2xl font-semibold mb-6 text-foreground">
-                From Historical Innovation to Contemporary Consequences
-              </h3>
+          {/* Section Divider/Header */}
+          <div className="text-center mb-16">
+             <div className="inline-block w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mb-8"></div>
+            <h3 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              From Innovation to <span className="text-primary">Consequence</span>
+            </h3>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              How a machine learning breakthrough evolved into a global challenge for democratic integrity.
+            </p>
+          </div>
 
-              <div className="space-y-5 text-muted-foreground leading-relaxed text-lg">
-                <p>
-                 The historical development of deepfakes illustrates how advances in artificial intelligence, particularly deep learning and generative models, unintentionally introduced new societal risks. Early digital editing tools normalized media manipulation by making altered images and videos more common, but the introduction of Generative Adversarial Networks (GANs) in 2014 marked a critical turning point. Originally designed to advance machine learning research, GANs enabled the creation of highly realistic synthetic media that is increasingly difficult to distinguish from authentic content.
-</p> <p>
-As this technology matured, the release of consumer-level applications after 2020 moved deepfake creation beyond laboratories and technical experts into the public domain. This widespread accessibility directly contributed to contemporary issues such as online harassment, financial fraud, and large-scale misinformation. Building on earlier cultural acceptance of manipulated media, modern political actors can now exploit deepfakes to influence elections, undermine trust in journalism, and destabilize democratic institutions on a global scale. Together, these developments demonstrate a clear causal relationship between past technological innovations and today’s challenges in information integrity and public trust.
-                </p>
-              </div>
-            </div>
+          {/* 3-Column Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {analysisCards.map((card, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: card.delay, duration: 0.5 }}
+                whileHover={{ y: -10, transition: { duration: 0.2 } }}
+                className="group relative h-full"
+              >
+                {/* Glow Effect on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative h-full bg-card border border-border p-8 rounded-2xl overflow-hidden hover:border-primary/50 transition-colors shadow-sm">
+                  {/* Decorative Top Line */}
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+
+                  {/* Card Content */}
+                  <div className="relative z-10 flex flex-col h-full">
+                    <span className="text-xs font-mono text-secondary uppercase tracking-wider mb-3">
+                      {card.highlight}
+                    </span>
+                    <h4 className="font-heading text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">
+                      {card.title}
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed text-sm flex-grow">
+                      {card.content}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
+
       </div>
 
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+      {/* --- BACKGROUND DECORATION --- */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
     </section>
   );
 }

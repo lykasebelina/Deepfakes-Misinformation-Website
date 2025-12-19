@@ -163,7 +163,7 @@ export default function References() {
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground mb-2">
-            © 2024 Educational Research Project
+            © 2025 Deepfakes & Misinformation | STS Project by Lyka Sebelina
           </p>
           <p className="text-xs text-muted-foreground">
             This website was created for educational purposes to explore the contemporary
