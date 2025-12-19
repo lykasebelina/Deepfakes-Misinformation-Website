@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { CheckCircle2, HelpCircle } from "lucide-react";
+import { CheckCircle2, HelpCircle, Brain, Scale, Users } from "lucide-react";
 
 const facts = [
   {
@@ -29,7 +29,7 @@ const facts = [
 const opinions = [
   {
     title: "Free Speech Concerns",
-    content: "Some argue that regulating deepfakes could infringe on freedom of expression and artistic creativity, creating a slippery slope for censorship.",
+    content: "Some argue that regulating deepfakes could infringe on freedom of expression and creativity, creating a slippery slope for censorship.",
     perspective: "Digital Rights Advocates",
   },
   {
@@ -49,11 +49,36 @@ const opinions = [
   },
 ];
 
+const debateTabs = [
+  {
+    id: 0,
+    label: "Persuasion",
+    icon: Brain,
+    title: "The Psychology of Belief",
+    content: "Deepfakes are uniquely persuasive because they exploit society’s long-standing trust in visual and audio evidence. Videos and voice recordings are often perceived as more credible than written claims, allowing synthetic media to override critical thinking and emotionally persuade audiences even when the content is false."
+  },
+  {
+    id: 1,
+    label: "The Argument",
+    icon: Scale,
+    title: "Regulation vs. Innovation",
+    content: "Competing arguments shape the public debate. Advocates for regulation argue that deepfakes pose severe risks to democracy, privacy, and public safety, justifying stronger legal controls. In contrast, opponents emphasize freedom of expression, technological inevitability, and the potential for positive innovation, warning that overregulation could suppress creativity."
+  },
+  {
+    id: 2,
+    label: "The Dispute",
+    icon: Users,
+    title: "Societal Conflict",
+    content: "These opposing viewpoints create ongoing disputes among governments, technology companies, media organizations, and civil society. The disagreement centers on where to draw the line between protecting society from harm and preserving individual rights. This conflict demonstrates how argument and dispute play a central role in shaping policy responses."
+  }
+];
+
 export default function FactsOpinions() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [hoveredFact, setHoveredFact] = useState<number | null>(null);
   const [hoveredOpinion, setHoveredOpinion] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState(0);
 
   return (
     <section id="facts" className="relative py-32 bg-noise">
@@ -83,7 +108,7 @@ export default function FactsOpinions() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-12 mb-24">
           {/* Facts Column */}
           <div>
             <div className="flex items-center gap-3 mb-8">
@@ -164,6 +189,75 @@ export default function FactsOpinions() {
             </div>
           </div>
         </div>
+
+        {/* 🔹 UPDATED INTERACTIVE SECTION: Persuasion and Public Debate */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="mt-12 bg-card/30 border border-border rounded-2xl overflow-hidden backdrop-blur-sm"
+        >
+          <div className="p-8 md:p-12">
+            <h3 className="font-heading text-3xl font-bold mb-8 text-center">
+              Persuasion and Public Debate
+            </h3>
+
+            {/* Navigation Tabs */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {debateTabs.map((tab) => {
+                const Icon = tab.icon;
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                      isActive
+                        ? "bg-primary text-background shadow-[0_0_20px_-5px_rgba(249,115,22,0.5)] scale-105"
+                        : "bg-background border border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Dynamic Content */}
+            <div className="relative min-h-[200px] max-w-4xl mx-auto">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-background/50 border border-border/50 rounded-xl p-8 shadow-inner"
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="p-4 bg-primary/10 rounded-full mb-4">
+                        {/* Render the icon dynamically based on active tab */}
+                        {(() => {
+                            const ActiveIcon = debateTabs[activeTab].icon;
+                            return <ActiveIcon className="w-8 h-8 text-primary" />;
+                        })()}
+                    </div>
+                    
+                    <h4 className="text-2xl font-bold mb-4 text-foreground">
+                      {debateTabs[activeTab].title}
+                    </h4>
+                    
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      {debateTabs[activeTab].content}
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );

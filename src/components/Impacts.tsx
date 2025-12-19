@@ -1,7 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { AlertTriangle, DollarSign, Users2, Shield } from "lucide-react";
+import { AlertTriangle, DollarSign, Users2, MapPin, Shield, Globe2, Landmark } from "lucide-react";
 
 const impacts = [
   {
@@ -189,6 +189,64 @@ export default function Impacts() {
           </motion.div>
         </div>
       </div>
+
+
+              {/* 🌍 NEW SECTION: Geographic & Global Implications */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.9, delay: 0.7 }}
+          className="mt-24 max-w-6xl mx-auto"
+        >
+          
+
+              <div className="grid md:grid-cols-3 gap-8">
+                {/* Local */}
+                <div className="bg-card border border-border rounded-lg p-6">
+                  <MapPin className="w-8 h-8 text-primary mb-4 mx-auto" />
+                  <h4 className="font-heading text-xl font-semibold mb-3 text-center">Local Level</h4>
+                  <p className="text-muted-foreground leading-relaxed text-justify">
+                    At the local level, individuals and communities are directly affected through scams, harassment,
+                    reputational damage, and non-consensual deepfake content. Schools, workplaces, and families face
+                    growing challenges in verifying digital information, increasing the need for media literacy and
+                    community awareness.
+                  </p>
+                </div>
+
+                {/* National */}
+                <div className="bg-card border border-border rounded-lg p-6">
+                  <Landmark className="w-8 h-8 text-secondary mb-4 mx-auto" />
+                  <h4 className="font-heading text-xl font-semibold mb-3 text-center">National Level</h4>
+                  <p className="text-muted-foreground leading-relaxed text-justify">
+                    National governments face threats to election integrity, public trust, and political stability.
+                    Deepfakes complicate law enforcement, strain legal systems, and intensify political polarization.
+                    Countries with stronger regulations and media institutions are better equipped to respond than
+                    those with weaker digital governance.
+                  </p>
+                </div>
+
+                {/* Global */}
+                <div className="bg-card border border-border rounded-lg p-6">
+                  <Globe2 className="w-8 h-8 text-primary mb-4 mx-auto" />
+                  <h4 className="font-heading text-xl font-semibold mb-3 text-center">Global Level</h4>
+                  <p className="text-muted-foreground leading-relaxed text-justify">
+                    Globally, deepfakes enable cross-border misinformation campaigns, cybercrime, and geopolitical
+                    manipulation. Differences in laws, technological access, and cultural norms create uneven
+                    vulnerabilities across regions, making international cooperation essential to address this
+                    growing global security challenge.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-orange-400 text-muted-foreground text-center mt-10 max-w-4xl mx-auto leading-relaxed">
+                The geographic spread of deepfake technology highlights how science and technology intersect with
+                culture, economics, and politics at every level of society. Addressing these challenges requires
+                coordinated local action, strong national policies, and sustained international collaboration.
+              </p>
+      
+         
+        </motion.div>
+  
 
       {/* Background decoration */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>

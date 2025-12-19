@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 
 const timelineEvents = [
   {
-    year: "1990s",
+    year: "1990s - 2000s",
     title: "Digital Photo Manipulation",
     description: "Adobe Photoshop and similar tools enable basic image editing, setting the foundation for digital media manipulation.",
   },
@@ -44,7 +44,7 @@ const timelineEvents = [
     description: "Multiple countries introduce deepfake-specific legislation; detection technology advances.",
   },
   {
-    year: "2024",
+    year: "2024 - Present",
     title: "Election Interference",
     description: "Deepfakes used in election campaigns worldwide, raising unprecedented concerns about democratic integrity.",
   },
@@ -58,6 +58,7 @@ export default function Timeline() {
   return (
     <section id="history" className="relative py-32 bg-background">
       <div className="max-w-7xl mx-auto px-6">
+        {/* HEADER */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -81,8 +82,8 @@ export default function Timeline() {
           </p>
         </motion.div>
 
+        {/* TIMELINE */}
         <div className="relative">
-          {/* Vertical line */}
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-primary"></div>
 
           <div className="space-y-12">
@@ -96,10 +97,8 @@ export default function Timeline() {
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
               >
-                {/* Timeline dot */}
                 <div className="absolute left-0 md:left-1/2 w-4 h-4 -translate-x-1/2 bg-primary rounded-full border-4 border-background z-10"></div>
 
-                {/* Content card */}
                 <div className={`w-full md:w-[calc(50%-2rem)] ml-8 md:ml-0 ${
                   index % 2 === 0 ? "md:pr-12" : "md:pl-12"
                 }`}>
@@ -109,20 +108,9 @@ export default function Timeline() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-mono text-sm text-primary font-semibold">{event.year}</span>
-                      <motion.div
-                        animate={{ rotate: expandedIndex === index ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <svg className="w-5 h-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </motion.div>
-                    </div>
-                    
-                    <h3 className="font-heading text-xl font-semibold mb-2">{event.title}</h3>
-                    
+                    <span className="font-mono text-sm text-primary font-semibold">{event.year}</span>
+                    <h3 className="font-heading text-xl font-semibold mt-2 mb-2">{event.title}</h3>
+
                     <motion.div
                       initial={false}
                       animate={{
@@ -140,6 +128,30 @@ export default function Timeline() {
             ))}
           </div>
         </div>
+
+        {/* ✅ COMBINED BOX */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-24 mx-auto max-w-full"
+        >
+          <div className="relative rounded-2xl p-[3px] bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 shadow-[0_0_30px_-5px_rgba(249,115,22,0.5)]">
+            <div className="rounded-xl bg-background p-8 md:p-10 text-center">
+              <h3 className="font-heading text-2xl font-semibold mb-6 text-foreground">
+                From Historical Innovation to Contemporary Consequences
+              </h3>
+
+              <div className="space-y-5 text-muted-foreground leading-relaxed text-lg">
+                <p>
+                 The historical development of deepfakes illustrates how advances in artificial intelligence, particularly deep learning and generative models, unintentionally introduced new societal risks. Early digital editing tools normalized media manipulation by making altered images and videos more common, but the introduction of Generative Adversarial Networks (GANs) in 2014 marked a critical turning point. Originally designed to advance machine learning research, GANs enabled the creation of highly realistic synthetic media that is increasingly difficult to distinguish from authentic content.
+</p> <p>
+As this technology matured, the release of consumer-level applications after 2020 moved deepfake creation beyond laboratories and technical experts into the public domain. This widespread accessibility directly contributed to contemporary issues such as online harassment, financial fraud, and large-scale misinformation. Building on earlier cultural acceptance of manipulated media, modern political actors can now exploit deepfakes to influence elections, undermine trust in journalism, and destabilize democratic institutions on a global scale. Together, these developments demonstrate a clear causal relationship between past technological innovations and today’s challenges in information integrity and public trust.
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
 
       {/* Decorative elements */}
