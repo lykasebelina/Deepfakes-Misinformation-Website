@@ -7,7 +7,7 @@ const facts = [
   {
     title: "96% Detection Rate",
     content: "Studies show that deepfake detection technology can identify manipulated content with up to 96% accuracy in controlled settings.",
-    source: "MIT Technology Review, 2023",
+    source: "Intel News Report, 2022",
   },
   {
     title: "500% Increase",

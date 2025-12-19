@@ -48,7 +48,7 @@ const references = [
   },
   {
     id: 8,
-    citation: "Intel. (2022, November 14). Intel Introduces Real-Time Deepfake Detector. Intel Newsroom.",
+    citation: "Intel. (2022). Intel Introduces Real-Time Deepfake Detector. Intel Newsroom.",
     category: "Corporate / Technology News",
     url: "https://newsroom.intel.com/artificial-intelligence/intel-introduces-real-time-deepfake-detector?utm_source=chatgpt.com",
 },
