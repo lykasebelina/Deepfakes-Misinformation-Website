@@ -23,6 +23,18 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-noise overflow-hidden">
+      {/* BACKGROUND IMAGE WITH DARK OVERLAY ADDED HERE */}
+      <div 
+        className="absolute inset-0 z-0" 
+        style={{
+          // Added a linear gradient with dark rgba values before the url to create a dark overlay
+          backgroundImage: "linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('/deepfakes.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          // Removed opacity: 0.4 as the gradient now handles the darkening better
+        }}
+      />
+
       {/* Ambient glow effect */}
       <div className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-30"></div>
       

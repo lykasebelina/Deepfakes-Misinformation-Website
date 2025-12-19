@@ -8,60 +8,70 @@ const references = [
     id: 1,
     citation: "Goodfellow, I., Pouget-Abadie, J., Mirza, M., et al. (2014). Generative Adversarial Networks. Advances in Neural Information Processing Systems, 27.",
     category: "Technical Research",
+    url: "https://arxiv.org/abs/1406.2661",
   },
   {
     id: 2,
     citation: "Chesney, R., & Citron, D. (2019). Deep Fakes: A Looming Challenge for Privacy, Democracy, and National Security. California Law Review, 107(6), 1753-1820.",
     category: "Legal & Policy",
+    url: "https://scholarship.law.bu.edu/faculty_scholarship/640/",
   },
   {
     id: 3,
     citation: "Vaccari, C., & Chadwick, A. (2020). Deepfakes and Disinformation: Exploring the Impact of Synthetic Political Video on Deception, Uncertainty, and Trust in News. Social Media + Society, 6(1).",
     category: "Media Studies",
+    url: "https://journals.sagepub.com/doi/10.1177/2056305120903408",
   },
   {
     id: 4,
-    citation: "Deeptrace Labs. (2023). The State of Deepfakes: Landscape, Threats, and Impact. Annual Report.",
+    citation: "Deeptrace Labs. (2019). The State of Deepfakes: Landscape, Threats, and Impact. Annual Report.",
     category: "Industry Report",
+    url: "https://regmedia.co.uk/2019/10/08/deepfake_report.pdf",
   },
   {
     id: 5,
     citation: "Kietzmann, J., Lee, L. W., McCarthy, I. P., & Kietzmann, T. C. (2020). Deepfakes: Trick or treat? Business Horizons, 63(2), 135-146.",
     category: "Business & Economics",
+    url: "https://www.sciencedirect.com/science/article/abs/pii/S0007681319301600",
   },
   {
     id: 6,
     citation: "Federal Bureau of Investigation. (2023). Internet Crime Report: Deepfake-Enabled Fraud. U.S. Department of Justice.",
     category: "Government Report",
+    url: "https://www.ic3.gov/annualreport/reports/2023_ic3report.pdf",
   },
   {
     id: 7,
     citation: "Westerlund, M. (2019). The Emergence of Deepfake Technology: A Review. Technology Innovation Management Review, 9(11), 39-52.",
     category: "Technical Research",
+    url: "https://timreview.ca/article/1282",
   },
   {
     id: 8,
-    citation: "Hao, K. (2023). Deepfake Detection Algorithms Are Making Progress. But Can They Keep Up? MIT Technology Review.",
+    citation: "Hao, K. (2019). Artificial Intelligence: The biggest threat of deepfakes isnt the deepfakes themselves. MIT Technology Review.",
     category: "Journalism",
+    url: "https://www.technologyreview.com/2019/10/10/132667/the-biggest-threat-of-deepfakes-isnt-the-deepfakes-themselves/",
   },
   {
     id: 9,
-    citation: "Sensity AI. (2023). The State of Deepfakes 2023: Realism, Reach and Ramifications. Research Report.",
+    citation: "Sensity AI. (2023). The State of Deepfakes 2023: Realities, Threats, And Impact. Research Report.",
     category: "Industry Report",
+    url: "https://www.securityhero.io/state-of-deepfakes/",
   },
   {
     id: 10,
     citation: "Paris, B., & Donovan, J. (2019). Deepfakes and Cheap Fakes: The Manipulation of Audio and Visual Evidence. Data & Society Research Institute.",
     category: "Media Studies",
+    url: "https://datasociety.net/library/deepfakes-and-cheap-fakes/",
   },
 ];
 
 export default function References() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [copiedId, setCopiedId] = useState(null);
 
-  const copyToClipboard = (text: string, id: number) => {
+  const copyToClipboard = (text, id) => {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
@@ -115,9 +125,9 @@ export default function References() {
                       {ref.citation}
                     </p>
                     <button
-                      onClick={() => copyToClipboard(ref.citation, ref.id)}
+                      onClick={() => copyToClipboard(ref.url, ref.id)}
                       className="flex-shrink-0 p-2 hover:bg-primary/10 rounded transition-colors"
-                      title="Copy citation"
+                      title="Copy Link"
                     >
                       {copiedId === ref.id ? (
                         <Check className="w-4 h-4 text-primary" />
